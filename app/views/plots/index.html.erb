@@ -1,7 +1,14 @@
 <h1> Plots </h1>
 
-<ul>
+<div class="plots-container">
   <% @plots.each do |plot| %>
-    <li>Plot Number: <%= plot.number %></li>
+    <div class="plot">
+      <p>Plot Number: <%= plot.number %></p>
+      <div class="plants">
+        <% plot.plants.each do |plant| %>
+          <p><%= plant.name %></p>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
