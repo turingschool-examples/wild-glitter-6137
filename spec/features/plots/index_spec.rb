@@ -97,4 +97,78 @@ RSpec.describe "Plots index page" do
       expect(page).to_not have_content("Romanesco Broccoli")
     end
   end
+
+  # User Story 2
+  it "has a button next to each plant to remove it" do
+    visit plots_path
+
+    within("#plot-#{@plot_1.id}") do
+      within("#plot-#{@plot_1.id}-plant-#{@pepper.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+      within("#plot-#{@plot_1.id}-plant-#{@chard.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+      within("#plot-#{@plot_1.id}-plant-#{@squash.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+      within("#plot-#{@plot_1.id}-plant-#{@carrot.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+      within("#plot-#{@plot_1.id}-plant-#{@bean.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+    end
+
+    within("#plot-#{@plot_2.id}") do
+      within("#plot-#{@plot_2.id}-plant-#{@chard.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+      within("#plot-#{@plot_2.id}-plant-#{@bean.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+      within("#plot-#{@plot_2.id}-plant-#{@carrot.id}") do
+        expect(page).to have_button("Remove Plant From Plot")
+      end
+    end
+  end
+
+  it "can remove plants from a plot" do
+    visit plots_path
+
+
+    within("#plot-#{@plot_1.id}") do
+      expect(page).to have_content("Black Pearl Pepper")
+      within("#plot-#{@plot_1.id}-plant-#{@pepper.id}") do
+        click_button("Remove Plant From Plot")
+      end
+      expect(page).to have_content("Bright Lights Swiss Chard")
+      within("#plot-#{@plot_1.id}-plant-#{@chard.id}") do
+        click_button("Remove Plant From Plot")
+      end
+    end
+
+    expect(current_path).to eq(plots_path)
+
+    within("#plot-#{@plot_1.id}") do
+      expect(page).to_not have_content("Black Pearl Pepper")
+      expect(page).to_not have_content("Bright Lights Swiss Chard")
+    end
+
+    within("#plot-#{@plot_2.id}") do
+      expect(page).to have_content("Bright Lights Swiss Chard")
+    end
+
+    within("#plot-#{@plot_3.id}") do
+      expect(page).to have_content("Black Pearl Pepper")
+    end
+
+    within("#plot-#{@plot_4.id}") do
+      expect(page).to have_content("Black Pearl Pepper")
+    end
+
+    within("#plot-#{@plot_5.id}") do
+      expect(page).to have_content("Black Pearl Pepper")
+    end
+  end
 end
