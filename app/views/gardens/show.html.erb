@@ -1,0 +1,10 @@
+<h1><%= @garden.name %></h1>
+
+<div id="plants-list">
+  <h2>Plants in the Garden</h2>
+  <ul>
+    <% @garden.unique_plants_under_100_days.each do |plant| %>
+      <li class="plant-item"><%= plant.name %></li>
+    <% end %>
+  </ul>
+</div>

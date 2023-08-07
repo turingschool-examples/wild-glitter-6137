@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "/plots" do
   before do
-    @brave = Garden.create(name: "Brave Harvest", organic: true)
-    @plot_1 = @brave.plots.create(number: 1, size: "Medium", direction: "North")
-    @plot_2 = @brave.plots.create(number: 2, size: "Small", direction: "East")
-    @tomato = Plant.create(name: "Tomato", description: "Red", days_to_harvest: 40)
-    @bell = Plant.create(name: "Bell Pepper", description: "Tasty", days_to_harvest: 20)
-    @eggplant = Plant.create(name: "Eggplant", description: "Purple", days_to_harvest: 30)
-    @plant_plot_1 = PlantPlot.create(plant: @tomato, plot: @plot_1)
-    @plant_plot_2 = PlantPlot.create(plant: @bell, plot: @plot_1)
-    @plant_plot_3 = PlantPlot.create(plant: @bell, plot: @plot_2)
-    @plant_plot_4 = PlantPlot.create(plant: @eggplant, plot: @plot_2)
+    @brave = Garden.create!(name: "Brave Harvest", organic: true)
+    @plot_1 = @brave.plots.create!(number: 1, size: "Medium", direction: "North")
+    @plot_2 = @brave.plots.create!(number: 2, size: "Small", direction: "East")
+    @tomato = Plant.create!(name: "Tomato", description: "Red", days_to_harvest: 40)
+    @bell = Plant.create!(name: "Bell Pepper", description: "Tasty", days_to_harvest: 20)
+    @eggplant = Plant.create!(name: "Eggplant", description: "Purple", days_to_harvest: 30)
+    @plant_plot_1 = PlantPlot.create!(plant: @tomato, plot: @plot_1)
+    @plant_plot_2 = PlantPlot.create!(plant: @bell, plot: @plot_1)
+    @plant_plot_3 = PlantPlot.create!(plant: @bell, plot: @plot_2)
+    @plant_plot_4 = PlantPlot.create!(plant: @eggplant, plot: @plot_2)
   end
 
   describe "When I visit the plots index page" do
