@@ -1,0 +1,9 @@
+<h1><%= @garden.name %>Garden Show Page</h1>
+
+<h3>Quick-growing plants in this garden:</h3>
+
+<ul>
+  <% @garden.quick_growing.each do |plant| %>
+    <%= plant.name %>
+  <% end %>
+</ul>

@@ -19,6 +19,7 @@ def load_test_data
   PlotPlant.create!(plot: @plot_1, plant: @plant_1)
   PlotPlant.create!(plot: @plot_1, plant: @plant_2)
   PlotPlant.create!(plot: @plot_1, plant: @plant_7)
+  PlotPlant.create!(plot: @plot_1, plant: @plant_8)
   PlotPlant.create!(plot: @plot_2, plant: @plant_4)
   PlotPlant.create!(plot: @plot_2, plant: @plant_3)
   PlotPlant.create!(plot: @plot_2, plant: @plant_8)
