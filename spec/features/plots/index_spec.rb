@@ -26,11 +26,12 @@ RSpec.describe 'Plots index page' do
 
       PlantPlot.create!(plot: @plot_2, plant: @plant_3)
       PlantPlot.create!(plot: @plot_2, plant: @plant_4)
+      PlantPlot.create!(plot: @plot_2, plant: @plant_1)
     end
 
     it 'I see a list of all plot numbers' do
       visit "/plots"
-      save_and_open_page
+      
       expect(page).to have_content('Plots Index')
       expect(page).to have_content('Plot Number')
       expect(page).to have_content(@plot_1.number)
@@ -41,6 +42,45 @@ RSpec.describe 'Plots index page' do
       expect(page).to have_content(@plant_3.name)
       expect(page).to have_content(@plant_4.name)
     end
-    
+
+      #     User Story 2, Remove a Plant from a Plot
+
+  # As a visitor
+  # When I visit the plots index page
+  # Next to each plant's name
+  # I see a link to remove that plant from that plot
+
+  # When I click on that link
+  # I'm returned to the plots index page
+  # And I no longer see that plant listed under that plot,
+  # And I still see that plant's name under other plots that is was associated with.
+
+  # Note: you do not need to test for any sad paths or implement any flash messages. 
+
+    it 'I see a link to remove that plant from that plot' do 
+      visit "/plots"
+      
+      expect(page).to have_content('Purple Flower')
+
+      within "#plot-#{@plot_1.id}" do 
+        expect(page).to have_button('Remove')
+        click_button 'Remove'
+      end
+      
+      expect(current_path).to eq("/plots")
+      
+      within "#plot-#{@plot_1.id}" do 
+        expect(page).to_not have_content('Purple Flower')
+        expect(page).to have_content('Red Flower')
+      end
+
+      within "#plot-#{@plot_2.id}" do 
+        expect(page).to have_content('Purple Flower')
+      end
+
+
+    end
+
   end
+
 end
