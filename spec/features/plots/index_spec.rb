@@ -35,36 +35,29 @@ describe "plots index" do
     expect(page).to have_content(@plot_3.number)
     expect(page).to have_content(@plot_4.number)
 
-    within "##{@plot_1.id}" do
+    within "#plot_#{@plot_1.id}" do
       expect(page).to have_content(@plant_1.name)
       expect(page).to have_content(@plant_2.name)
       expect(page).to_not have_content(@plant_3.name)
     end
   end
 
-  xit "each bulk discount has a link to its show page" do
-    expect(page).to have_link("#{@discount_1.id}")
-    expect(page).to have_link("#{@discount_2.id}")
-    expect(page).to have_link("#{@discount_3.id}")
-    expect(page).to have_link("#{@discount_4.id}")
-    expect(page).to have_link("#{@discount_5.id}")
-    expect(page).to_not have_link("#{@discount_6.id}")
-
-    click_link "#{@discount_1.id}"
-
-    expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @discount_1))
-  end
-
-  xit "has a link to delete next to each bulk discount" do
-    within "##{@discount_1.id}" do
-      expect(page).to have_button("Delete Discount")
-      click_button "Delete Discount"
+  it "has a link to delete next to each plant" do
+    within "#plot_#{@plot_1.id}" do
+      within "##{@plant_plot_1.id}" do
+        expect(page).to have_button("Delete Plant From Plot")
+        click_button "Delete Plant From Plot"
+      end
     end
-    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
 
-    within "#Discounts" do
-      expect(page).to_not have_content("Quantity Threshold: 5")
-      expect(page).to_not have_content("Discount: 10")
+    expect(current_path).to eq(plots_path)
+
+    within "#plot_#{@plot_1.id}" do
+      expect(page).to_not have_content(@plant_1.name)
+    end
+
+    within "#plot_#{@plot_4.id}" do
+      expect(page).to have_content(@plant_1.name)
     end
   end
 end
