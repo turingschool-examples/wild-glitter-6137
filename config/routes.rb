@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  get "/plots", to: "plots#index"
+
+  #resources :plots, only: [:index]
 end
