@@ -35,26 +35,21 @@ RSpec.describe 'Plots index page', type: :feature do
     expect(page).to have_content("No plants in this plot.")
   end
 
-  xit 'can delete plants from a plot' do
-
-    # User Story 2, Remove a Plant from a Plot
-    # As a visitor
-    # When I visit the plots index page
-    # Next to each plant's name
-    # I see a link to remove that plant from that plot
-    # When I click on that link
-    # I'm returned to the plots index page
-    # And I no longer see that plant listed under that plot,
-    # And I still see that plant's name under other plots that is was associated with.
-
-    # Verify that the plant names are listed on the page
+  it 'can delete plants from a plot' do
     expect(page).to have_content(@plant1.name)
 
-    # Find the first occurrence of the element containing the plant's name and click the "Remove" link/button within that context.
-    first("p", text: @plant1.name).click_button("Remove")
-  
-    # Expect that the plant name is no longer present on the page after removing it from the plot.
-    expect(page).not_to have_content(@plant1.name)
+    first("li", text: @plant1.name).click_link("Remove")
+
+    expect(current_path).to eq('/plots')
+
+    within("h3", text: "Plot Number: @plot1.number") do
+      expect(page).not_to have_content(@plant1.name)
+    end
+
+    within("h3", text: "Plot Number: @plot2.number") do
+      expect(page).to have_content(@plant1.name)
+      expect(page).to have_content(@plant2.name)
+    end
   end
 
   

@@ -5,7 +5,10 @@
   <% if plot.plants.any? %>
     <ul>
       <% plot.plants.each do |plant| %>
-        <p><%= plant.name %> <%= button_to 'Remove', remove_plot_plant_path(plot, plant), method: :delete %></p>
+        <li>
+          <%= plant.name %>
+          <%= button_to 'Remove', remove_plot_plant_path(plot, plant), method: :delete %>
+        </li>
       <% end %>
     </ul>
   <% else %>
