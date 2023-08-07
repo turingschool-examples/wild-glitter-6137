@@ -13,10 +13,11 @@ RSpec.describe "Plots Index Page", type: :feature do
 
     @plant3 = @plot2.plants.create!(name: "Parsnip", description: "Has an earthy taste", days_to_harvest: 50)
     @plant4 = @plot2.plants.create!(name: "Hops", description: "Used to flavor beer", days_to_harvest: 110)
+
+    visit plots_path
   end
   scenario "I see a list of all plot numbers and plant names for those plots" do 
-    visit plots_path
-    
+
     expect(page).to have_content("Plot Number: #{@plot1.number}")
     @plot1.plants.each do |plant|
       expect(page).to have_content("Plant Name: #{plant.name}")
@@ -29,7 +30,7 @@ RSpec.describe "Plots Index Page", type: :feature do
   end
 
   scenario "Next to each plant name I see a link to remove the plant from plot but its still associated with other plots" do 
-    visit plots_path 
+    
     expect(page).to have_content("Plant Name: Parsnip").twice
     
     expect(page).to have_link("Delete: #{@plant5.name}")
