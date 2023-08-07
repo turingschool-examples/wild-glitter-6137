@@ -58,7 +58,6 @@ describe "Plots index page" do
           end
         end
         
-        save_and_open_page
         expect(current_path).to eq("/plots")
         within "#plot_#{@plot_1.id}" do
           expect(page).to_not have_content("#{@plant_1.name}")
