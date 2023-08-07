@@ -1,11 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Garden, type: :model do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plants).through(:plots) }
-  end
-
+RSpec.describe "Garden Show Page", type: :feature do
   before :each do
     # Gardens
     @garden_a = Garden.create!(name: "Ethan's Test Garden", organic: true)
@@ -36,12 +31,29 @@ RSpec.describe Garden, type: :model do
     @plot_b1_plant_4 = PlotPlant.create!(plot_id: @plot_b1.id, plant_id: @plant_4.id)
   end
 
-  describe "Instance methods" do
-    describe "#distinct_sub100_plants" do
-      it "returns a unique list of plants in the garden that take less than 100 days to harvest" do
-        expect(@garden_a.distinct_sub100_plants).to match_array([@plant_1, @plant_2, @plant_3])
-        expect(@garden_b.distinct_sub100_plants).to match_array([@plant_3])
-      end
+  it "it has a list of unique plants included in that garden's plots that take less than 100 days to harvest" do
+    visit garden_path(@garden_a)
+
+    within("#garden-distinct_sub100-plants") do
+      # Plant 1 appears once in Garden A, in Plot A1
+      expect(page).to have_content(@plant_1.name).once
+
+      # Plants 2 and 3 appear twice in Garden A, once each in Plots A1 and A2
+      expect(page).to have_content(@plant_2.name).once
+      expect(page).to have_content(@plant_3.name).once
+
+      # Plant 4 takes 100 days to harvest, so it should not appear on the page
+      expect(page).to_not have_content(@plant_4.name)
+    end
+    
+    visit garden_path(@garden_b)
+
+    within("#garden-distinct_sub100-plants") do
+      # Plant 3 appears once in Garden B, in Plot B1
+      expect(page).to have_content(@plant_3.name).once
+
+      # Plant 4 appears in Plot B1, but takes 100 days to harvest, so it should not appear on the page
+      expect(page).to_not have_content(@plant_4.name)
     end
   end
 end

@@ -1,0 +1,10 @@
+<h1><%= @garden.name %></h1>
+<div id="garden-distinct_sub100-plants">
+  <h2>Plants</h2>
+  <p>Unique plants of this garden that take less than 100 days to harvest.</p>
+  <ul>
+    <% @garden.distinct_sub100_plants.each do |plant| %>
+      <li><%= plant.name %></li>
+    <% end %>
+  </ul>
+</div>
