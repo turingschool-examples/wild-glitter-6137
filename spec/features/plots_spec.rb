@@ -17,6 +17,10 @@ RSpec.describe Plot do
     @plot_2.plants << @plant_2
     @plot_3.plants << @plant_3
 
+    @plot_1.plants << @plant_4
+    @plot_2.plants << @plant_4
+    @plot_3.plants << @plant_4
+
   end
 
   #User Story 1, Plots Index Page
@@ -29,12 +33,15 @@ RSpec.describe Plot do
 
           expect(page).to have_content(@plot_1.number)
           expect(page).to have_content(@plant_1.name)
+          expect(page).to have_content(@plant_4.name)
 
           expect(page).to have_content(@plot_2.number)
           expect(page).to have_content(@plant_2.name)
+          expect(page).to have_content(@plant_4.name)
 
           expect(page).to have_content(@plot_3.number)
           expect(page).to have_content(@plant_3.name)
+          expect(page).to have_content(@plant_4.name)
 
         end
       end
@@ -52,7 +59,17 @@ RSpec.describe Plot do
             describe "I'm returned to the plots index page" do
               describe "And I no longer see that plant listed under that plot," do
                 it "And I still see that plant's name under other plots that is was associated with." do
+                  visit "/plots"
 
+                  expect(page).to have_link("#{@plot_1.number} remove")
+                  expect(page).to have_link("#{@plot_2.number} remove")
+                  expect(page).to have_link("#{@plot_3.number} remove")
+
+                  click_link "#{@plot_1.number} remove"
+
+                  expect(current_path).to eq("/plots")
+
+                  expect(page).to_not have_content(@plot_1.number)
                 end
               end
             end
