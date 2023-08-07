@@ -1,9 +1,12 @@
 <% @plots.each do |plot| %>
-  <div class="plot" id="plot-<%= plot.id %>">
+  <div id="plot-<%= plot.id %>">
     <h3>Plot Number: <%= plot.number %></h3>
     <ul>
       <% plot.plants.each do |plant| %>
-        <li class="plant-name"><%= plant.name %></li>
+        <li id="plant_name_<%= plant.id %>">
+          <%= plant.name %>
+          <%= button_to 'Remove', plant_plot_path(PlantPlot.find_by(plant: plant, plot: plot)), method: :delete, data: { confirm: "Are you sure you want to remove this plant from this plot?" } %>
+        </li>
       <% end %>
     </ul>
   </div>
