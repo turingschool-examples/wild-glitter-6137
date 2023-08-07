@@ -16,11 +16,6 @@ RSpec.describe Plot do
     @plot_1.plants << @plant_1
     @plot_2.plants << @plant_2
     @plot_3.plants << @plant_3
-
-    @plot_1.plants << @plant_4
-    @plot_2.plants << @plant_4
-    @plot_3.plants << @plant_4
-
   end
 
   #User Story 1, Plots Index Page
@@ -33,16 +28,22 @@ RSpec.describe Plot do
 
           expect(page).to have_content(@plot_1.number)
           expect(page).to have_content(@plant_1.name)
-          expect(page).to have_content(@plant_4.name)
+
 
           expect(page).to have_content(@plot_2.number)
           expect(page).to have_content(@plant_2.name)
-          expect(page).to have_content(@plant_4.name)
+
 
           expect(page).to have_content(@plot_3.number)
           expect(page).to have_content(@plant_3.name)
-          expect(page).to have_content(@plant_4.name)
 
+          # Tried implenting a check to make sure things were order properly but
+          # was having issues getting this to work even though it could find the content
+          # expect(@plant_1.name).to_not appear_before(@plot_1.number)
+          # expect(@plant_1.name).to appear_before(@plot_2.number)
+          # expect(@plot_2.number).to appear_before(@plant_2.name)
+          # expect(@plant_2.name).to appear_before(@plot_3.number)
+          # expect(@plot_3.number).to appear_before(@plant_3.name)
         end
       end
     end
@@ -59,20 +60,24 @@ RSpec.describe Plot do
             describe "I'm returned to the plots index page" do
               describe "And I no longer see that plant listed under that plot," do
                 it "And I still see that plant's name under other plots that is was associated with." do
+                  @plot_1.plants << @plant_4
+                  @plot_2.plants << @plant_4
+                  @plot_3.plants << @plant_4
+
                   visit "/plots"
                   save_and_open_page
+                  first_button = page.all('button', text: 'Remove Cucumber').first
 
                   expect(page).to have_button("Remove #{@plant_1.name}")
                   expect(page).to have_button("Remove #{@plant_2.name}")
                   expect(page).to have_button("Remove #{@plant_3.name}")
-                  expect(page).to have_button("Remove #{@plant_4.name}")
+                  expect(page).to have_selector('button', text: 'Remove Cucumber', count: 3)
 
-
-                  first("input[type='submit'][value='Remove Cucumber']").click
+                  first_button.click
 
                   expect(current_path).to eq("/plots")
 
-                  expect(page).to have_content(@plant_4.name)
+                  expect(page).to have_selector('button', text: 'Remove Cucumber', count: 2)
                 end
               end
             end
@@ -83,13 +88,18 @@ RSpec.describe Plot do
   end
 
   # #User Story 3, Garden's Plants
+
   describe "As a visitor" do
     describe "When I visit a garden's show page ('/gardens/:id')" do
       describe "Then I see a list of plants that are included in that garden's plots" do
         describe "And I see that this list is unique (no duplicate plants)" do
           it "And I see that this list only includes plants that take less than 100 days to harvest" do
+            @plot_1.plants << @plant_4
+            @plot_2.plants << @plant_4
+            @plot_3.plants << @plant_4
+
             visit "/gardens/#{@garden_1.id}"
-            save_and_open_page
+
             non_included_plants = [@plant_2, @plant_3, @plant_4]
 
             expect(page).to have_content(@plant_1.name)
