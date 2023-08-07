@@ -8,10 +8,10 @@ RSpec.describe Plot do
     @plot_2 = @garden_1.plots.create!(number: 2, size: "Medium", direction: "West")
     @plot_3 = @garden_1.plots.create!(number: 3, size: "Large", direction: "North")
 
-    @plant_1 = Plant.create!(name: "Sunflower", description: " This is a sunflower", days_to_harvest: 14)
-    @plant_2 = Plant.create!(name: "Tomato", description: " This is a Tomato", days_to_harvest: 24)
-    @plant_3 = Plant.create!(name: "Watermelon", description: " This is a Watermelon", days_to_harvest: 34)
-    @plant_4 = Plant.create!(name: "Cucumber", description: " This is a Cucumber", days_to_harvest: 15)
+    @plant_1 = Plant.create!(name: "Sunflower", description: " This is a sunflower", days_to_harvest: 99)
+    @plant_2 = Plant.create!(name: "Tomato", description: " This is a Tomato", days_to_harvest: 100)
+    @plant_3 = Plant.create!(name: "Watermelon", description: " This is a Watermelon", days_to_harvest: 200)
+    @plant_4 = Plant.create!(name: "Cucumber", description: " This is a Cucumber", days_to_harvest: 300)
 
     @plot_1.plants << @plant_1
     @plot_2.plants << @plant_2
@@ -68,13 +68,34 @@ RSpec.describe Plot do
                   expect(page).to have_button("Remove #{@plant_4.name}")
 
 
-                  click_button "Remove #{@plant_4.name}"
+                  first("input[type='submit'][value='Remove Cucumber']").click
 
                   expect(current_path).to eq("/plots")
 
                   expect(page).to have_content(@plant_4.name)
                 end
               end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  # #User Story 3, Garden's Plants
+  describe "As a visitor" do
+    describe "When I visit a garden's show page ('/gardens/:id')" do
+      describe "Then I see a list of plants that are included in that garden's plots" do
+        describe "And I see that this list is unique (no duplicate plants)" do
+          it "And I see that this list only includes plants that take less than 100 days to harvest" do
+            visit "/gardens/#{@garden_1.id}"
+            save_and_open_page
+            non_included_plants = [@plant_2, @plant_3, @plant_4]
+
+            expect(page).to have_content(@plant_1.name)
+
+            non_included_plants.each do |plant|
+              expect(page).to_not have_content(plant.name)
             end
           end
         end

@@ -1,0 +1,4 @@
+<h1>Plants in garden that take less than 100 days to harvest</h1>
+<p><% @garden.unique_plants_sub_100.each do |plant| %></p>
+  <p><%= plant %></p>
+<% end %>
