@@ -1,6 +1,6 @@
 <% @plots.each do |plot| %>
   </br><p>Plot Number: <%= plot.number %></p>
   <% plot.plants.each do |plant| %>
-    <p>Planted Here: <%= plant.name %> -  <%= link_to "Remove Plant", "/plots/index", method: :delete %></p>
+    <p>Planted Here: <%= plant.name %> -  <%= link_to "Remove Plant", plot_path(plot), method: :delete %></p>
   <%end%>
 <%end%>
