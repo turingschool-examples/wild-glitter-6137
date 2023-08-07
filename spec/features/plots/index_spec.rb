@@ -27,20 +27,45 @@ RSpec.describe 'Plots Index Page', type: :feature do
         describe 'Which I visit the plots index page /plots' do
             it 'Shows a list of all plot numbers, under each I see the name of all that plots plants' do
                 visit plots_path
-
+                
+                within "#plot_#{@plot1.id}" do
                     expect(page).to have_content(@plot1.number)
                     expect(page).to have_content(@plant1.name)
                     expect(page).to have_content(@plant2.name)
                     expect(page).to have_content(@plant3.name)
+                end
 
-
+                within "#plot_#{@plot2.id}" do
                     expect(page).to have_content("Plot Number: #{@plot2.number}")
                     expect(page).to have_content(@plant4.name)
                     expect(page).to have_content(@plant5.name)
                     expect(page).to have_content(@plant6.name)
+                end
+            end
 
-
+            it 'has a button to delete a plant from a plot' do
                 
+                visit plots_path
+                
+                within "#plot_#{@plot1.id}" do
+                    expect(page).to have_content(@plant2.name)
+                    expect(page).to have_button("Delete #{@plant2.name}")
+                end
+                within "#plot_#{@plot1.id}" do
+                    click_button "Delete #{@plant2.name}"
+                end
+                
+                visit plots_path
+
+                within "#plot_#{@plot1.id}" do
+                    expect(page).to_not have_content(@plant2.name)
+                end
+                
+
+                within "#plot_#{@plot2.id}" do
+                    expect(page).to have_content(@plant4.name)
+                    expect(page).to have_button("Delete #{@plant4.name}")
+                end
             end
         end
     end
