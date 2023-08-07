@@ -3,7 +3,32 @@
 # The generated `.rspec` file contains `--require spec_helper` which will cause
 # this file to always be loaded, without a need to explicitly require it in any
 # files.
-#
+def test_data
+  @garden_1 = Garden.create!(name: "Denver Botanic Gardens", organic: true)
+  @garden_2 = Garden.create!(name: "Dubai Mircale Garden", organic: true)
+  @garden_3 = Garden.create!(name: "Gardens of Villandry", organic: true)
+
+  @plot_1 = @garden_1.plots.create!(number: 13, size: "Large", direction: "North")
+  @plot_2 = @garden_1.plots.create!(number: 14, size: "Small", direction: "South")
+  @plot_3 = @garden_2.plots.create!(number: 2, size: "Large", direction: "East")
+  @plot_4 = @garden_2.plots.create!(number: 3, size: "Medium", direction: "North")
+  @plot_5 = @garden_3.plots.create!(number: 25, size: "Small", direction: "West")
+  @plot_6 = @garden_3.plots.create!(number: 26, size: "Small", direction: "South")
+
+  @plant_1 = Plant.create!(name: "Hydnora", description: "It's a parasite that latches on to the roots of other species and grows entirely underground except for the flower.", days_to_harvest: 140)
+  @plant_2 = Plant.create!(name: "Purple Pitcher Plant", description: "Insects are trapped inside the plant after they slide down the plants slimy innards by small hairs tilted downward inside the plant.", days_to_harvest: 200)
+  @plant_3 = Plant.create!(name: "Parachute flower", description: "The flower's smell beckons insects inside. Once there, the insects are trapped but not eaten by the plant.", days_to_harvest: 90)
+  @plant_4 = Plant.create!(name: "Hammer orchid", description: "The plant produces pheromones — chemicals that alter the behavior of a creature of the same species — that draw male wasps who may mistake the orchid for a female wasp.", days_to_harvest: 105)
+  @plant_5 = Plant.create!(name: "Suicide palm", description: "At the end of its life, the stem tips explode in a massive show of tiny flowers capable of being pollinated and developing into fruit as it dies.", days_to_harvest: 3650)
+  @plant_6 = Plant.create!(name: "Strangler fig", description: "A 'parasitic nightmare', when the fig grows downward, it robs its host, usually a living tree, of its nutrients. When the fig grows upward, its leaves block sunlight from reaching the host.", days_to_harvest: 7300)
+
+  @plot_1.plants.push(@plant_2, @plant_4, @plant_1, @plant_6)
+  @plot_2.plants.push(@plant_6)
+  @plot_3.plants.push(@plant_1, @plant_5, @plant_4)
+  @plot_4.plants.push(@plant_4, @plant_3)
+  @plot_5.plants.push(@plant_2)
+  @plot_6.plants.push(@plant_3, @plant_1)
+end
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
 # will add to the boot time of your test suite on EVERY test run, even for an
