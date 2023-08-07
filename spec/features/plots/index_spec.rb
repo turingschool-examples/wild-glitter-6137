@@ -15,27 +15,18 @@ RSpec.describe "the plots index page" do
     expect("Green Cabbage").to appear_before("Bell Pepper")
   end
   # user story 2
-  # As a visitor
-  # When I visit the plots index page
-  # Next to each plant's name
-  # I see a link to remove that plant from that plot
-  # When I click on that link
-  # I'm returned to the plots index page
-  # And I no longer see that plant listed under that plot,
-  # And I still see that plant's name under other plots that is was associated with.
-  # Note: you do not need to test for any sad paths or implement any flash messages. 
   it "displays a link/button to remove plant from plot next to each plant" do
     visit plots_path
 
-    expect(page).to have_link "Remove Plant"
+    expect(page).to have_button "Remove Plant"
   end
 
   it "returns me to the plots index upon clicking the link and I no longer see that plant listed under the plot" do
     visit plots_path
 
-    expect(page).to have_link "Remove Plant"
+    expect(page).to have_button "Remove Plant"
 
-    first(:link, "Remove Plant").click
+    first(:button, "Remove Plant").click
 
     expect(page).to_not have_content("Cherry Tomato")
   end

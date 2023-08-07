@@ -5,14 +5,14 @@ RSpec.describe "the garden's show page" do
     test_data
   end
   # user story 3
-  # As a visitor
-  # When I visit a garden's show page ('/gardens/:id')
-  # Then I see a list of plants that are included in that garden's plots
-  # And I see that this list is unique (no duplicate plants)
-  # And I see that this list only includes plants that take less than 100 days to harvest
-  it "displays a list of plants that are included in that garden's plots" do
+  it "displays a list of plants that are included in that garden's plots with no duplicates and are less than 100 days to harvest" do
     visit garden_path(@garden_2)
 
-    expect(page).to have_content()
+    expect(page).to have_content("Powell Family Garden")
+    expect(page).to have_content("String Bean")
+    expect(page).to have_content("Bell Pepper")
+    expect(page).to have_content("Cherry Tomato")
+
+    expect("Cherry Tomato").to appear_before("Bell Pepper")
   end
 end
