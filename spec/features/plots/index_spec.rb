@@ -10,13 +10,13 @@ RSpec.describe "plots index page", type: :feature do
   # that plot's plants
   describe "when I visit the plots index page" do
     it "shows a list of all plot number" do
-      garden_1 = Garden.create!(name: "Turing Community Garden", organice: true)
-      plot_1 = garden_1.plots.create!(number: 25, size "Large", direction: "East")
-      plot_2 = garden_1.plots.create!(number: 31, size "Medium", direction: "West")
-      plot_3 = garden_1.plots.create!(number: 18, size "Small", direction: "North")
+      garden_1 = Garden.create!(name: "Turing Community Garden", organic: true)
+      plot_1 = garden_1.plots.create!(number: 25, size: "Large", direction: "East")
+      plot_2 = garden_1.plots.create!(number: 31, size: "Medium", direction: "West")
+      plot_3 = garden_1.plots.create!(number: 18, size: "Small", direction: "North")
 
       visit "/plots"
-      
+      save_and_open_page
       expect(page).to have_content(plot_1.number)
       expect(page).to have_content(plot_2.number)
       expect(page).to have_content(plot_3.number)
