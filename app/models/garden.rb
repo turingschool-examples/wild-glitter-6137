@@ -1,3 +1,6 @@
 class Garden < ApplicationRecord
-   has_many :plots
+  validates_presence_of :name
+  validates :organic, inclusion: { in: [true, false] }, exclusion: nil
+
+  has_many :plots
 end

@@ -1,3 +1,6 @@
 class Plot < ApplicationRecord
-   belongs_to :garden
+  validates_presence_of :number,
+                        :size,
+                        :direction
+  belongs_to :garden
 end
