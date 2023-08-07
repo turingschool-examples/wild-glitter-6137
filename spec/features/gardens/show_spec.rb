@@ -34,10 +34,15 @@ RSpec.describe 'Gardens #show Page', type: :feature do
       visit garden_path(@garden_1)
     end
 
-    it "only shows unique plant names that take less than 100 days to harvest" do
+    it "only shows unique plant that take less than 100 days to harvest" do
       within(".garden-quick-harvest-plants") do
         expect(page).to have_content(@plant_2.name, count: 1)
+        expect(page).to have_content(@plant_2.description, count: 1)
+        expect(page).to have_content(@plant_2.days_to_harvest, count: 1)
+
         expect(page).to have_content(@plant_4.name, count: 1)
+        expect(page).to have_content(@plant_4.description, count: 1)
+        expect(page).to have_content(@plant_4.days_to_harvest, count: 1)
       end
     end
   end

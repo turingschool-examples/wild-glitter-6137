@@ -30,8 +30,8 @@ RSpec.describe Garden, type: :model do
       @pp_6 = PlotPlant.create!(plot_id: @plot_3.id, plant_id: @plant_4.id)
     end
 
-    it "can find the unique names of plants harvestable in less than 100 days" do
-      expect(@garden_1.quicker_harvest_plants).to eq([@plant_2.name, @plant_4.name])
+    it "can find the unique plants harvestable in less than 100 days" do
+      expect(@garden_1.quicker_harvest_plants).to eq([@plant_2, @plant_4])
     end
   end
 end
