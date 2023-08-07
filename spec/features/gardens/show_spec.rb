@@ -26,12 +26,14 @@ RSpec.describe 'the gardens show page' do
     plant_plot1 = PlantPlot.create!(plant: plant1, plot: plot2)
     plant_plot2 = PlantPlot.create!(plant: plant1, plot: plot3)
     plant_plot3 = PlantPlot.create!(plant: plant5, plot: plot2)
+    plant_plot4 = PlantPlot.create!(plant: plant2, plot: plot2)
   
 
     visit garden_path(garden1)
     #save_and_open_page
     expect(page).to have_content("Tomato - Occurrences: 3")
-    expect(page).to have_content("Grape - Occurrences: 2")
+    expect(page).to_not have_content("Grape - Occurrences: 2")
+    expect(page).to have_content("Kale - Occurrences: 2")
     end
   end
 end

@@ -39,7 +39,7 @@ RSpec.describe Garden, type: :model do
 
     sorted_plants = garden1.plant_occurences
     expect(sorted_plants.first.occurrences).to eq(3)
-
+    
     end
   end
 end

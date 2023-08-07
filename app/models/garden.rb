@@ -5,7 +5,8 @@ class Garden < ApplicationRecord
 
 
    def plant_occurences
-      plants.joins(:plant_plots).select('plants.*, COUNT(DISTINCT plant_plots.plot_id) AS occurrences').group('plants.id').order('occurrences DESC')
+      plants.joins(:plant_plots)
+      .where('plants.days_to_harvest < ?', 100).select('plants.*, COUNT(DISTINCT plant_plots.plot_id) AS occurrences').group('plants.id').order('occurrences DESC')
    end
 end
 
