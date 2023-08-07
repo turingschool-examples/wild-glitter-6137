@@ -33,5 +33,27 @@ RSpec.describe "gardens show page", type: :feature do
       expect(page).to have_content(plant_2.name)
       expect(page).to have_content(plant_3.name)
     end
+
+    it "only displays plants that are unique and that take less than 100 days to harvest" do
+      garden_1 = Garden.create!(name: "Turing Community Garden", organic: true)
+      plot_1 = garden_1.plots.create!(number: 25, size: "Large", direction: "East")
+      plot_2 = garden_1.plots.create!(number: 31, size: "Medium", direction: "West")
+      plot_3 = garden_1.plots.create!(number: 18, size: "Small", direction: "North")
+  
+      plant_1 = Plant.create!(name: "Flower", description: "Beautiful", days_to_harvest: 14)
+      plant_2 = Plant.create!(name: "Watermelon", description: "Big", days_to_harvest: 60)
+      plant_3 = Plant.create!(name: "Tomato", description: "Yummy", days_to_harvest: 101)
+
+      plot_1.plants << plant_1
+      plot_1.plants << plant_2
+      plot_2.plants << plant_2
+      plot_2.plants << plant_3
+
+      visit garden_path(garden_1)
+
+      expect(page).to have_content(plant_1.name)
+      expect(page).to have_content(plant_2.name)
+      expect(page).to_not have_content(plant_3.name)
+    end
   end
 end
