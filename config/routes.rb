@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :plots, only: [:index]  do
     resources :plants, only: [:destory], controller: "plant_plots"
   end
+
+  resources :gardens, only: [:show]
   #resources :plots, only: [:index]
 end

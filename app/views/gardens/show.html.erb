@@ -1,0 +1,8 @@
+<h1><%= @garden.name %> Garden</h1>
+
+<h2>List of Plants (Sorted by Occurrences)</h2>
+<ul>
+  <% @sorted_plants.each do |plant| %>
+    <li><%= plant.name %> - Occurrences: <%= plant.occurrences%></li>
+  <% end %>
+</ul>
