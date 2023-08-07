@@ -1,12 +1,17 @@
 <h1>Plots</h1>
 
 <div id="all-plots">
-  <% @plots.each do |p| %>
-    <div id="plot-<%= p.id %>">
-      <h3><%= "Plot #{p.number}" %></h3>
+  <% @plots.each do |plot| %>
+    <div id="plot-<%= plot.id %>">
+      <h3><%= "Plot #{plot.number}" %></h3>
       <ul>
-        <% p.plants.each do |plant| %>
-          <li><%= plant.name %></li>
+        <% plot.plot_plants.each do |plot_plant| %>
+          <li id="plot-plant-<%= plot_plant.id %>">
+            <%= plot_plant.plant.name %>
+            <%= form_with model: plot_plant, method: :delete do |f| %>
+              <%= f.button "Delete", method: :delete %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>
