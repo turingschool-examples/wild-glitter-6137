@@ -43,15 +43,21 @@ describe "plots index" do
   end
 
   it "has a link to delete next to each plant" do
-    within "#plant_#{@plant_1.id}" do
-      expect(page).to have_button("Delete Plant")
-      click_button "Delete Plant"
+    within "#plot_#{@plot_1.id}" do
+      within "##{@plant_plot_1.id}" do
+        expect(page).to have_button("Delete Plant From Plot")
+        click_button "Delete Plant From Plot"
+      end
     end
-    
-    expect(current_path).to eq(plant_plots_path(@plot_1, @plant_1))
+
+    expect(current_path).to eq(plots_path)
 
     within "#plot_#{@plot_1.id}" do
       expect(page).to_not have_content(@plant_1.name)
+    end
+
+    within "#plot_#{@plot_4.id}" do
+      expect(page).to have_content(@plant_1.name)
     end
   end
 end

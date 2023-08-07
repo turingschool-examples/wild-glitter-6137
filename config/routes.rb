@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :plots, only: [:index]
+
+  resources :plant_plots, only: [:destroy]
+
+  # resources :plant_plots, only: [:destroy]
 end
