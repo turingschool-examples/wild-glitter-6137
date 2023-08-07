@@ -1,0 +1,6 @@
+<h1><%= @garden.name %> Show Page</h1>
+
+<h3>List of plants that take less than 100 days to harvest:</h3>
+  <% @garden.plants_less_than_100.each do |plant| %>
+    <p><%= plant %></p>
+  <% end %>
