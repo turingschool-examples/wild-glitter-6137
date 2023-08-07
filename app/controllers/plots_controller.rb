@@ -7,6 +7,6 @@ class PlotsController < ApplicationController
     plot = Plot.find(params[:plot_id])
     plant = Plant.find(params[:plant_id])
     plot.plants.delete(plant)
-    redirect_to "/plots", notice: "Plant removed from plot."
+    redirect_to "/plots"
   end
 end
