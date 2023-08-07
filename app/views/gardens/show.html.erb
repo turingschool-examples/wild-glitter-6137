@@ -1,0 +1,10 @@
+<h1><%= @garden.name %></h1>
+<p>----------------------------------</p>
+<b> Plants with less than 100 days to harvest </b>
+<br />
+<br />
+<% @garden.sub_100_to_harvest.each do |plant| %>
+  <div id="<%= plant.id %>">
+    <li><%= plant.name %></p>
+  </div>
+<% end %>

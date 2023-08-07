@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   resources :plant_plots, only: [:destroy]
 
-  # resources :plant_plots, only: [:destroy]
+  resources :gardens, only: [:show]
+
 end
