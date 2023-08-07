@@ -1,0 +1,7 @@
+<h1><%= @garden.name %> Plants</h1>
+
+<h3>Plants That Mature In Less Than 100 Days</h3>
+
+<% @garden.fast_growing_plants.each do |plant| %>
+  <%= plant.name %><br>
+<% end %>
