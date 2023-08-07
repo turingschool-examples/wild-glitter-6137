@@ -14,6 +14,7 @@ describe "Plots Index Page" do
 
     PlantPlot.create!(plant: @bell, plot: @plot_1)
     PlantPlot.create!(plant: @pepper, plot: @plot_1)
+    PlantPlot.create!(plant: @sweet, plot: @plot_1)
 
     PlantPlot.create!(plant: @sweet, plot: @plot_2)
     
@@ -33,9 +34,43 @@ describe "Plots Index Page" do
       within("#plot-#{@plot_1.number}") do 
         expect(page).to have_content(@bell.name)
         expect(page).to have_content(@pepper.name)
+        expect(page).to have_content(@sweet.name)
+
       end
 
       within("#plot-#{@plot_2.number}") do 
+        expect(page).to have_content(@sweet.name)
+        expect(page).to_not have_content(@bell.name)
+        expect(page).to_not have_content(@pepper.name)
+      end
+    end
+
+    it "has a button to remove the plant from the plot" do 
+      visit plots_path
+
+      within("#plot-#{@plot_1.number}") do 
+        expect(page).to have_link("Remove", count: 3)
+      end
+
+      within("#plot-#{@plot_2.number}") do 
+        expect(page).to have_link("Remove")
+      end
+    end
+
+    it "has a button to remove the plant " do 
+      visit plots_path
+
+      within("#plot-#{@plot_2.number}") do 
+        expect(current_path).to eq(plots_path)
+        expect(page).to have_content(@sweet.name)
+
+        click_link("Remove")
+
+        expect(current_path).to eq(plots_path)
+        expect(page).to_not have_content(@sweet.name)
+      end
+
+      within("#plot-#{@plot_1.number}") do 
         expect(page).to have_content(@sweet.name)
       end
     end
