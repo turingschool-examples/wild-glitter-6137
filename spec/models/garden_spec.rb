@@ -30,7 +30,7 @@ RSpec.describe Garden, type: :model do
   
     describe "#plant_list" do
       it "returns an array of unique plants that harvests are under 100" do 
-        expect(@garden_1.plant_list).to match_array([@bell, @pepper, @sweet])
+        expect(@garden_1.plant_list).to match_array([@sweet, @bell, @pepper])
       end
     end
   end

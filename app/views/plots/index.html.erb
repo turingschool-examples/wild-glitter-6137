@@ -7,7 +7,7 @@
     <ol>
       <% plot.plants.each do |plant| %>
         <li><%=plant.name %>
-          <%= link_to "Remove", plot_plant_path(plot, plant), method: :delete %>
+          <%= button_to "Remove", plot_plant_path(plot, plant), method: :delete %>
         </li>
       <% end %>
     </ol>

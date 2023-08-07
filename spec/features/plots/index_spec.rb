@@ -49,11 +49,11 @@ describe "Plots Index Page" do
       visit plots_path
 
       within("#plot-#{@plot_1.number}") do 
-        expect(page).to have_link("Remove", count: 3)
+        expect(page).to have_button("Remove", count: 3)
       end
 
       within("#plot-#{@plot_2.number}") do 
-        expect(page).to have_link("Remove")
+        expect(page).to have_button("Remove")
       end
     end
 
@@ -64,7 +64,7 @@ describe "Plots Index Page" do
         expect(current_path).to eq(plots_path)
         expect(page).to have_content(@sweet.name)
 
-        click_link("Remove")
+        click_button("Remove")
 
         expect(current_path).to eq(plots_path)
         expect(page).to_not have_content(@sweet.name)

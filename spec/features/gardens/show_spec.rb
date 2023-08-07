@@ -65,6 +65,19 @@ describe "Garden Show page Page" do
       expect(page).to_not have_content("CARROTS")
       expect(page).to_not have_content("eggplant!!")
     end
+    
+    # User story 4
+    xit "has a list of plants sorted by the number of times it appears in the garden from most to least" do 
+      visit garden_path(@garden_1)
 
+      expect(page).to have_content("Sweet Potato")
+      expect(page).to have_content("Purple Beauty Sweet Bell Pepper")
+      expect(page).to have_content("Banana pepper")
+
+      expect("Sweet Potato").to appear_before("Purple Beauty Sweet Bell Pepper")
+      
+      expect(page).to_not have_content("Sweet Potato", count: 2)
+      expect(page).to_not have_content("Onion")
+    end
   end
 end
