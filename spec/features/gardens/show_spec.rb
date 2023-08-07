@@ -30,9 +30,10 @@ describe "Gardens show page" do
   end
   describe "As a visitor When I visit a garden's show page ('/gardens/:id')" do
     it "US3.a Then I see a list of plants that are included in that garden's plots And I see that this list is unique (no duplicate plants)" do
-      expect(page).to have_content(@plant_1.id, count: 1)
-      expect(page).to have_content(@plant_2.id, count: 1)
-      expect(page).to have_content(@plant_3.id, count: 1)
+      save_and_open_page
+      expect(page).to have_content(@plant_1.name, count: 1)
+      expect(page).to have_content(@plant_2.name, count: 1)
+      expect(page).to have_content(@plant_3.name, count: 1)
     end
     it "US3.b And I see that this list only includes plants that take less than 100 days to harvest" do
       expect(page).to_not have_content(@plant_6.id)
