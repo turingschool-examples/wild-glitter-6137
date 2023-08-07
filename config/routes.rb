@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :plots, only: [:index] do
-    resources :plants, only: [:destroy]
+    resources :plants, only: [:destroy], controller: "plots_plant"
   end
 end

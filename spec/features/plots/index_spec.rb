@@ -25,6 +25,25 @@ RSpec.describe "The Plots Index", type: :feature do
           expect(page).to have_button("Remove")
         end
       end
+    
+      within ".plot[plot-id='#{@plot_1.id}']" do
+        expect(page).to have_content("Hydnora")
+    
+        hydnora = find(".plant[plant-id='#{@plant_1.id}']")
+        within hydnora do
+          click_button "Remove"
+        end
+      end
+      
+      expect(current_path).to eq(plots_path)
+
+      within ".plot[plot-id='#{@plot_1.id}']" do
+        expect(page).to_not have_content("Hydnora")
+      end
+
+      within ".plot[plot-id='#{@plot_6.id}']" do
+        expect(page).to have_content("Hydnora")
+      end
     end
   end
 end

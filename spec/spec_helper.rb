@@ -21,13 +21,25 @@ def test_data
   @plant_4 = Plant.create!(name: "Hammer orchid", description: "The plant produces pheromones — chemicals that alter the behavior of a creature of the same species — that draw male wasps who may mistake the orchid for a female wasp.", days_to_harvest: 105)
   @plant_5 = Plant.create!(name: "Suicide palm", description: "At the end of its life, the stem tips explode in a massive show of tiny flowers capable of being pollinated and developing into fruit as it dies.", days_to_harvest: 3650)
   @plant_6 = Plant.create!(name: "Strangler fig", description: "A 'parasitic nightmare', when the fig grows downward, it robs its host, usually a living tree, of its nutrients. When the fig grows upward, its leaves block sunlight from reaching the host.", days_to_harvest: 7300)
+  
+  @plot_1.plot_plants.create!(plant: @plant_2)
+  @plot_1.plot_plants.create!(plant: @plant_4)
+  @plot_1.plot_plants.create!(plant: @plant_1)
+  @plot_1.plot_plants.create!(plant: @plant_6)
 
-  @plot_1.plants.push(@plant_2, @plant_4, @plant_1, @plant_6)
-  @plot_2.plants.push(@plant_6)
-  @plot_3.plants.push(@plant_1, @plant_5, @plant_4)
-  @plot_4.plants.push(@plant_4, @plant_3)
-  @plot_5.plants.push(@plant_2)
-  @plot_6.plants.push(@plant_3, @plant_1)
+  @plot_2.plot_plants.create!(plant: @plant_6)
+
+  @plot_3.plot_plants.create!(plant: @plant_1)
+  @plot_3.plot_plants.create!(plant: @plant_5)
+  @plot_3.plot_plants.create!(plant: @plant_4)
+
+  @plot_4.plot_plants.create!(plant: @plant_4)
+  @plot_4.plot_plants.create!(plant: @plant_3)
+
+  @plot_5.plot_plants.create!(plant: @plant_2)
+
+  @plot_6.plot_plants.create!(plant: @plant_3)
+  @plot_6.plot_plants.create!(plant: @plant_1)
 end
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
