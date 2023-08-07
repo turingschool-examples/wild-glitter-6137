@@ -1,0 +1,13 @@
+<p>Plots: <% @plots.each do |plot| %></p>
+
+  <p><%= plot.number %></p>
+  <p>Plants: <% plot.plants.each do |plant| %></p>
+
+    <p><%= plant.name %></p>
+      <%= link_to 'Remove', plot_plant_path(plot, plant), method: :delete %>
+  <% end %>
+<% end %>
+
+
+
+
