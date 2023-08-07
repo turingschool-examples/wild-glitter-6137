@@ -65,7 +65,7 @@ RSpec.describe Plot do
                   @plot_3.plants << @plant_4
 
                   visit "/plots"
-                  save_and_open_page
+                  
                   first_button = page.all('button', text: 'Remove Cucumber').first
 
                   expect(page).to have_button("Remove #{@plant_1.name}")
