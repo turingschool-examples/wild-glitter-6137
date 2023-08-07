@@ -30,7 +30,6 @@ describe "Gardens show page" do
   end
   describe "As a visitor When I visit a garden's show page ('/gardens/:id')" do
     it "US3.a Then I see a list of plants that are included in that garden's plots And I see that this list is unique (no duplicate plants)" do
-      save_and_open_page
       expect(page).to have_content(@plant_1.name, count: 1)
       expect(page).to have_content(@plant_2.name, count: 1)
       expect(page).to have_content(@plant_3.name, count: 1)
