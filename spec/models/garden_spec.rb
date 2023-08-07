@@ -36,15 +36,10 @@ RSpec.describe Garden, type: :model do
     plant_plot1 = PlantPlot.create!(plant: plant1, plot: plot2)
     plant_plot2 = PlantPlot.create!(plant: plant1, plot: plot3)
     
-    require 'pry'; binding.pry
 
     sorted_plants = garden1.plant_occurences
+    expect(sorted_plants.first.occurrences).to eq(3)
 
-      sorted_plants.each do |plant|
-        require 'pry'; binding.pry
-      expect(garden1.plant_occurences.first.name).to eq("Tomato")
-      expect(garden1.plant_occurences.second.name).to eq("Grape")
-      end
     end
   end
 end

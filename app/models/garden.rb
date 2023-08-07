@@ -5,9 +5,19 @@ class Garden < ApplicationRecord
 
 
    def plant_occurences
-
-      #require 'pry'; binding.pry
-      plants.joins(:plant_plots).select('plants.*, COUNT(plant_plots.id) AS occurrences').group('plants.id').order('occurrences DESC')
-
+      plants.joins(:plant_plots).select('plants.*, COUNT(DISTINCT plant_plots.plot_id) AS occurrences').group('plants.id').order('occurrences DESC')
    end
 end
+
+#require 'pry'; binding.pry
+      #Plant.joins(:plant_plots).select('plants.*, COUNT(plant_plots.id) AS occurrences')
+      #require 'pry'; binding.pry
+
+        #plots.joins(:plants)
+
+
+#require 'pry'; binding.pry
+      #plants.joins(plots: :plants).select('plants.*, COUNT(plots.id) AS occurrences').group('plants.id').order('occurrences DESC')
+
+      
+      # plants.joins(:plant_plots).where('plant_plots.plot_id = plots.id').select('plants.*, COUNT(plant_plots.id) AS occurrences').group('plants.id').order('occurrences DESC')
