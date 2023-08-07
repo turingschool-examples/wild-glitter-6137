@@ -30,18 +30,34 @@ describe "Plots index page" do
     @pp_6 = PlotPlant.create!(plot_id: @plot_3.id, plant_id: @plant_6.id)
     @pp_7 = PlotPlant.create!(plot_id: @plot_4.id, plant_id: @plant_7.id)
     @pp_8 = PlotPlant.create!(plot_id: @plot_5.id, plant_id: @plant_8.id)
+    @pp_9 = PlotPlant.create!(plot_id: @plot_2.id, plant_id: @plant_1.id)
   end
   describe "As a visitor" do
     describe "when I visit the plots index page ('/plots')" do
-      it "I see a list of all plot numbers And under each plot number I see the names of all that plot's plants" do
-        visit "/plots"
-        
+      it "US1 I see a list of all plot numbers And under each plot number I see the names of all that plot's plants" do
         expect(page).to have_content("All Plots")
         @plots.each do |plot|
           expect(page).to have_content(plot.number)
           plot.plants.each do |plant|
             expect(page).to have_content(plant.name)
           end
+        end
+      end
+      it "US2.a Next to each plant's name I see a link to remove that plant from that plot" do
+        within "#plot_#{@plot_1.id}" do
+          expect(page).to have_content("#{@plant_1.name}")
+          expect(page).to have_link("remove plant")
+        end
+      end
+      it "US2.b When I click on that link I'm returned to the plots index page And I no longer see that plant listed under that plot, And I still see that plant's name under other plots that is was associated with." do
+        click_link "remove plant"
+
+        expect(current_path).to eq("/plots")
+        within "#plot_#{@plot_1.id}" do
+          expect(page).to_not have_content("#{@plant_1.name}")
+        end
+        within "#plot_#{@plot_2.id}" do
+          expect(page).to have_content("#{@plant_1.name}")
         end
       end
     end
