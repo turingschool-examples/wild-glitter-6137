@@ -15,4 +15,17 @@ def load_test_data
   @plant_6 = Plant.create!(name: "native milkweed", description: "Attracts butterflies.", days_to_harvest: 150)
   @plant_7 = Plant.create!(name: "carrot", description: "Needs loose, nutrient rich soil.", days_to_harvest: 90)
   @plant_8 = Plant.create!(name: "cilantro", description: "Prefers cool weather.", days_to_harvest: 60)
+
+  PlotPlant.create!(plot: @plot_1, plant: @plant_1)
+  PlotPlant.create!(plot: @plot_1, plant: @plant_2)
+  PlotPlant.create!(plot: @plot_1, plant: @plant_7)
+  PlotPlant.create!(plot: @plot_2, plant: @plant_4)
+  PlotPlant.create!(plot: @plot_2, plant: @plant_3)
+  PlotPlant.create!(plot: @plot_2, plant: @plant_8)
+  PlotPlant.create!(plot: @plot_3, plant: @plant_5)
+  PlotPlant.create!(plot: @plot_3, plant: @plant_6)
+  PlotPlant.create!(plot: @plot_3, plant: @plant_1)
+  PlotPlant.create!(plot: @plot_4, plant: @plant_8)
+  PlotPlant.create!(plot: @plot_4, plant: @plant_2)
+  PlotPlant.create!(plot: @plot_4, plant: @plant_3)
 end
