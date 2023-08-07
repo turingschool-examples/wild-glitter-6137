@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "The Plots Index", type: :feature do
+RSpec.describe "The Plots", type: :feature do
   before :each do
     test_data
   end
