@@ -53,5 +53,50 @@ RSpec.describe "plots index page", type: :feature do
       end
     end
   end
+
+# User Story 2, Remove a Plant from a Plot
+# As a visitor
+# When I visit the plots index page
+# Next to each plant's name
+# I see a link to remove that plant from that plot
+# When I click on that link
+# I'm returned to the plots index page
+# And I no longer see that plant listed under that plot,
+# And I still see that plant's name under other 
+# plots that is was associated with.
+# Note: you do not need to test for any sad paths or 
+# implement any flash messages. 
+
+  describe "when I visit the plots index page" do
+    it "has a link to remove that plant from that plot next to each plant's name" do
+      garden_1 = Garden.create!(name: "Turing Community Garden", organic: true)
+      plot_1 = garden_1.plots.create!(number: 25, size: "Large", direction: "East")
+      plot_2 = garden_1.plots.create!(number: 31, size: "Medium", direction: "West")
+      plot_3 = garden_1.plots.create!(number: 18, size: "Small", direction: "North")
+  
+      plant_1 = Plant.create!(name: "Flower", description: "Beautiful", days_to_harvest: 14)
+      plant_2 = Plant.create!(name: "Watermelon", description: "Big", days_to_harvest: 60)
+      plant_3 = Plant.create!(name: "Tomato", description: "Yummy", days_to_harvest: 90)
+  
+      plot_1.plants << plant_1
+      plot_2.plants << plant_2
+      plot_3.plants << plant_3
+      plot_3.plants << plant_1
+  
+      visit plots_path
+
+      within(".plot:contains('#{plot_1.number}')") do
+        expect(page).to have_link("Remove Plant")
+      end
+
+      within(".plot:contains('#{plot_2.number}')") do
+        expect(page).to have_link("Remove Plant")
+      end
+      
+      within(".plot:contains('#{plot_3.number}')") do
+        expect(page).to have_link("Remove Plant")
+      end
+    end
+  end
 end
 
