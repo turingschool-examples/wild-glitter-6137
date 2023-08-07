@@ -35,7 +35,7 @@ RSpec.describe Garden, type: :model do
 
     sorted_plants = garden1.plant_occurences
 
-    #Sorts by occurrences and makes is a method to call
+    #Sorts by occurrences and makes a method to call
     expect(sorted_plants.first.occurrences).to eq(3)
 
     #removes grape because it has a days to harvest <= 100
