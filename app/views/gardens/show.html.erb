@@ -1,0 +1,10 @@
+<h1>Garden</h1>
+
+<h2><%= @garden.name %></h2>
+
+<h3>Fast Plants in the Garden's Plots</h3>
+<ul>
+  <% Plant.fast_plants(@garden.id).each do |plant| %>
+    <li><%= plant.name %></li>
+  <% end %>
+</ul>
