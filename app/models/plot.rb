@@ -1,4 +1,5 @@
 class Plot < ApplicationRecord
-   belongs_to :garden
-   has_and_belongs_to_many :plants
+  belongs_to :garden
+  has_many :plants_plots
+  has_many :plants, through: :plants_plots
  end

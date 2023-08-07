@@ -9,5 +9,7 @@ Rails.application.routes.draw do
       delete 'remove', on: :member, to: 'plots/plants#remove', as: :remove
     end
   end
+
+  resources :gardens, only: :show
   
 end

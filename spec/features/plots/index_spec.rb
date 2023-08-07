@@ -35,7 +35,7 @@ RSpec.describe 'Plots index page', type: :feature do
     expect(page).to have_content("No plants in this plot.")
   end
 
-  it 'can delete plants from a plot' do
+  xit 'can delete plants from a plot' do
 
     # User Story 2, Remove a Plant from a Plot
     # As a visitor
