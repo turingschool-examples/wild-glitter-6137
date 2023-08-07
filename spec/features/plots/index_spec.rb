@@ -35,11 +35,13 @@ RSpec.describe "/plots" do
       within "#plot-#{@plot_1.id}" do
         expect(page).to have_content("Plants: #{@tomato.name}")
         expect(page).to have_content("Plants: #{@bell.name}")
+        expect(page).to_not have_content("Plants: #{@eggplant.name}")
       end
       
       within "#plot-#{@plot_2.id}" do
         expect(page).to have_content("Plants: #{@bell.name}")
         expect(page).to have_content("Plants: #{@eggplant.name}")    
+        expect(page).to_not have_content("Plants: #{@tomato.name}")    
       end
     end
   end
