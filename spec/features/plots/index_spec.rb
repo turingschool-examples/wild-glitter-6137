@@ -30,6 +30,11 @@ RSpec.describe "The Plots Index page" do
       end
     end
     expect(current_path).to eq(plots_path)
-    expect(page).to have_content("Rhubarb")
+    within("#plot-#{@p1.id}") do
+      expect(page).not_to have_content("Rhubarb")
+    end
+    within("#plot-#{@p2.id}") do
+      expect(page).to have_content("Rhubarb")
+    end
   end
 end
