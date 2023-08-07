@@ -35,22 +35,62 @@ RSpec.describe 'Plots #index Page', type: :feature do
   describe "When I visit the plots index page ('/plots')" do
     it "shows a list of all the plot numbers" do
       within("#plot-#{@plot_1.id}") do
-        expect(page).to have_content(@plot_1.number)
+        expect(page).to have_content(@plot_1.number, count: 1)
       end
-      expect(page).to have_content(@plot_2.number)
-      expect(page).to have_content(@plot_3.number)
-      expect(page).to have_content(@plot_4.number)
-      expect(page).to have_content(@plot_5.number)
+
+      within("#plot-#{@plot_2.id}") do
+        expect(page).to have_content(@plot_2.number, count: 1)
+      end
+
+      expect(page).to have_content(@plot_3.number, count: 1)
+      expect(page).to have_content(@plot_4.number, count: 1)
+      expect(page).to have_content(@plot_5.number, count: 1)
     end
 
     it "shows the names of all the plants for each plot" do
       within("#plot-#{@plot_1.id}") do
-        expect(page).to have_content(@plot_1.plant_names.join(", "))
+        expect(page).to have_content(@plant_1.name)
+        expect(page).to have_content(@plant_2.name)
       end
-      expect(page).to have_content(@plot_2.plant_names.join(", "))
-      expect(page).to have_content(@plot_3.plant_names.join(", "))
-      expect(page).to have_content(@plot_4.plant_names.join(", "))
-      expect(page).to have_content(@plot_5.plant_names.join(", "))
+
+      within("#plot-#{@plot_2.id}") do
+        expect(page).to have_content(@plant_3.name)
+        expect(page).to have_content(@plant_4.name)
+      end
+
+      within("#plot-#{@plot_3.id}") do
+        expect(page).to have_content(@plant_5.name)
+      end
+    end
+
+    it "has a button next to each plant's name to remove from the plot" do
+      within("#plot-#{@plot_1.id}") do
+        expect(page).to have_link("[Delete]", href: plot_plant_path(@pp_1.id))
+        expect(page).to have_link("[Delete]", href: plot_plant_path(@pp_2.id))
+      end
+
+      within("#plot-#{@plot_2.id}") do
+        expect(page).to have_link("[Delete]", href: plot_plant_path(@pp_3.id))
+        expect(page).to have_link("[Delete]", href: plot_plant_path(@pp_4.id))
+      end
+
+      within("#plot-#{@plot_3.id}") do
+        expect(page).to have_link("[Delete]", href: plot_plant_path(@pp_5.id))
+      end
+    end
+
+    it "when click, removes the plant from the plot and redirects to the plots #index page" do 
+      within("#plot-#{@plot_1.id}") do
+        expect(page).to have_content(@plant_1.name)
+
+        click_link("[Delete]", id: "delete-#{@pp_1.id}")
+      end
+
+      expect(current_path).to eq(plots_path)
+
+      within("#plot-#{@plot_1.id}") do
+        expect(page).to_not have_content(@plant_1.name)
+      end
     end
   end
 end
