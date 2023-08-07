@@ -4,7 +4,7 @@ class Garden < ApplicationRecord
    has_many :plants, through: :plant_plots
 
 
-   def plant_occurances
+   def plant_occurences
 
       #require 'pry'; binding.pry
       plants.joins(:plant_plots).select('plants.*, COUNT(plant_plots.id) AS occurrences').group('plants.id').order('occurrences DESC')

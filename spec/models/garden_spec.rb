@@ -31,9 +31,20 @@ RSpec.describe Garden, type: :model do
     "Fruit not vegetable", days_to_harvest: 75 )
     plant8 = plot2.plants.create!(name: "Grape", description:
     "Fruit vine", days_to_harvest: 100 )
-#require 'pry'; binding.pry
-      expect(garden1.plant_occurances.first.name).to eq("Tomato")
-      expect(garden1.plant_occurances.second.name).to eq("Grape")
+
+
+    plant_plot1 = PlantPlot.create!(plant: plant1, plot: plot2)
+    plant_plot2 = PlantPlot.create!(plant: plant1, plot: plot3)
+    
+    require 'pry'; binding.pry
+
+    sorted_plants = garden1.plant_occurences
+
+      sorted_plants.each do |plant|
+        require 'pry'; binding.pry
+      expect(garden1.plant_occurences.first.name).to eq("Tomato")
+      expect(garden1.plant_occurences.second.name).to eq("Grape")
+      end
     end
   end
 end
