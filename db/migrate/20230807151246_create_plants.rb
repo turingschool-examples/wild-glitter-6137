@@ -3,7 +3,7 @@ class CreatePlants < ActiveRecord::Migration[7.0]
     create_table :plants do |t|
       t.string :name
       t.string :description
-      t.string :days_to_harvest
+      t.integer :days_to_harvest
 
       t.timestamps
     end

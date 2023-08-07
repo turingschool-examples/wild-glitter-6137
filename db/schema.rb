@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_151421) do
   create_table "plants", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "days_to_harvest"
+    t.integer "days_to_harvest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
