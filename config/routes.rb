@@ -4,5 +4,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :plots, only: [:index]
+  resources :plots, only: [:index] do
+    resources :plants, only: [], controller: 'plots/plants' do
+      delete 'remove', on: :member, to: 'plots/plants#remove', as: :remove
+    end
+  end
+  
 end
