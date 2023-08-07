@@ -21,19 +21,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_151915) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "plant_plots", force: :cascade do |t|
+    t.bigint "plot_id", null: false
+    t.bigint "plant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_plant_plots_on_plant_id"
+    t.index ["plot_id"], name: "index_plant_plots_on_plot_id"
+  end
+
   create_table "plants", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "days_to_harvest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "plants_plots", id: false, force: :cascade do |t|
-    t.bigint "plot_id", null: false
-    t.bigint "plant_id", null: false
-    t.index ["plant_id", "plot_id"], name: "index_plants_plots_on_plant_id_and_plot_id"
-    t.index ["plot_id", "plant_id"], name: "index_plants_plots_on_plot_id_and_plant_id"
   end
 
   create_table "plots", force: :cascade do |t|
@@ -46,5 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_151915) do
     t.index ["garden_id"], name: "index_plots_on_garden_id"
   end
 
+  add_foreign_key "plant_plots", "plants"
+  add_foreign_key "plant_plots", "plots"
   add_foreign_key "plots", "gardens"
 end
