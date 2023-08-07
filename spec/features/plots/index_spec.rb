@@ -44,5 +44,30 @@ RSpec.describe "/plots" do
         expect(page).to_not have_content("Plants: #{@tomato.name}")    
       end
     end
+
+    it "I see a button to remove the plant from that plot" do
+      visit "/plots"
+      
+      within "#plot-#{@plot_2.id}" do
+        expect(page).to have_content("Plants:")
+        expect(page).to have_content("#{@bell.name}")
+        expect(page).to have_button("Remove Plant #{@bell.id}")
+        expect(page).to have_content("#{@eggplant.name}")
+        expect(page).to have_button("Remove Plant #{@eggplant.id}")
+
+        click_button("Remove Plant #{@bell.id}")
+      end
+
+      expect(current_path).to eq("/plots")
+      
+      within "#plot-#{@plot_2.id}" do
+        expect(page).to have_content("Plants:")
+
+        expect(page).to_not have_content("#{@bell.name}")
+        expect(page).to_not have_button("Remove Plant #{@bell.id}")
+        expect(page).to have_content("#{@eggplant.name}")
+        expect(page).to have_button("Remove Plant #{@eggplant.id}")
+      end
+    end
   end
 end
