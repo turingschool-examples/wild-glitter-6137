@@ -1,0 +1,7 @@
+<h1><%= @garden.name %></h1>
+<h3>Existing plants that can be harvested in less than 100 days:</h3>
+<ul class="garden-quick-harvest-plants">
+  <% @garden.quicker_harvest_plants.each do |plant| %>
+    <li><%= plant %></li>
+  <% end %>
+</ul>
