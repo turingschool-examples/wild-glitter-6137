@@ -9,4 +9,10 @@ class Garden < ApplicationRecord
       .distinct
       .pluck(:name)
   end
+
+  def sorted_list_of_flowers
+    plants.group(:name)
+      .order('COUNT(plants.id) DESC')
+      .pluck('name')
+  end
 end

@@ -6,3 +6,10 @@
     <p>Name: <%= plant %></p>
     <% end %> 
 </div>
+
+<div id="sorted-list">
+  <h4>List of Flowers in <%= @garden.name %> Garden</h4>
+    <% @sorted_flowers.each do |flower| %>
+      <p><%= flower %></p>
+    <% end %>
+</div>

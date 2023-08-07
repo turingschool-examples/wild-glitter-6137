@@ -30,5 +30,11 @@ RSpec.describe Garden, type: :model do
         expect(@garden.plants_with_quick_harvest).to eq([@plant1.name, @plant3.name])
       end
     end
+
+    describe "sorted_list_of_flowers" do
+      it "can create a sorted list of flowers in the garden" do
+        expect(@garden.sorted_list_of_flowers).to eq(["Blanket Flowers", "New England Aster", "Queen Anne's Lace"])
+      end
+    end
   end
 end
