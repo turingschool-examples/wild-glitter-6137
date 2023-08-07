@@ -1,0 +1,15 @@
+<h1>Plots Index Page</h1>
+
+<% @plots.each do |plot| %>
+  <div id ="plot-<%= plot.number %>">
+    <h2>Plot Number: <%= plot.number %></h2>
+    <ul>
+      <% plot.plants.each do |plant| %>
+        <li>
+          <%= plant.name %>
+          <%= link_to "Remove #{plant.name}", plot_plant_path(plot, plant), data: { turbo_method: :delete } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
