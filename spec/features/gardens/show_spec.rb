@@ -34,16 +34,26 @@ RSpec.describe "Garden Show Page", type: :feature do
   it "it has a list of unique plants included in that garden's plots that take less than 100 days to harvest" do
     visit garden_path(@garden_a)
 
-    within("#garden-unique-plants") do
-      # Plant 1 appears once in Garden A, in Plot 1
-      expect(page).to have_content(@plant1.name).once
+    within("#garden-distinct_sub100-plants") do
+      # Plant 1 appears once in Garden A, in Plot A1
+      expect(page).to have_content(@plant_1.name).once
 
-      # Plants 2 and 3 appear twice in Garden A, once each in Plots 1 and 2
-      expect(page).to have_content(@plant2.name).once
-      expect(page).to have_content(@plant3.name).once
+      # Plants 2 and 3 appear twice in Garden A, once each in Plots A1 and A2
+      expect(page).to have_content(@plant_2.name).once
+      expect(page).to have_content(@plant_3.name).once
 
       # Plant 4 takes 100 days to harvest, so it should not appear on the page
-      expect(page).to_not have_content(@plant4.name)
+      expect(page).to_not have_content(@plant_4.name)
+    end
+    
+    visit garden_path(@garden_b)
+
+    within("#garden-distinct_sub100-plants") do
+      # Plant 3 appears once in Garden B, in Plot B1
+      expect(page).to have_content(@plant_3.name).once
+
+      # Plant 4 appears in Plot B1, but takes 100 days to harvest, so it should not appear on the page
+      expect(page).to_not have_content(@plant_4.name)
     end
   end
 end
