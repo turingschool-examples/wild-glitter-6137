@@ -18,13 +18,24 @@ RSpec.describe Plot do
     @plot_3.plants << @plant_3
 
   end
+
   #User Story 1, Plots Index Page
 
   describe "As a visitor" do
     describe "When I visit the plots index page ('/plots')" do
       describe "I see a list of all plot numbers" do
         it "And under each plot number I see the names of all that plot's plants" do
-          
+          visit "/plots"
+
+          expect(page).to have_content(@plot_1.number)
+          expect(page).to have_content(@plant_1.name)
+
+          expect(page).to have_content(@plot_2.number)
+          expect(page).to have_content(@plant_2.name)
+
+          expect(page).to have_content(@plot_3.number)
+          expect(page).to have_content(@plant_3.name)
+
         end
       end
     end
