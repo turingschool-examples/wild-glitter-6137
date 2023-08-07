@@ -136,7 +136,6 @@ RSpec.describe "Plots index page" do
   it "can remove plants from a plot" do
     visit plots_path
 
-
     within("#plot-#{@plot_1.id}") do
       expect(page).to have_content("Black Pearl Pepper")
       within("#plot-#{@plot_1.id}-plant-#{@pepper.id}") do
