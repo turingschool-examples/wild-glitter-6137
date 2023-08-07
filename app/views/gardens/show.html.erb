@@ -1,0 +1,6 @@
+<h1><%= @garden.name %></h1>
+<p>Plants: <% @garden.plants.each do |plant| %></p>
+  <% if plant.days_to_harvest < 100 %>
+    <p><%= plant.name %></p>
+  <% end %>
+<% end %>
