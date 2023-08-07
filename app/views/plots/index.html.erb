@@ -2,8 +2,8 @@
 <p>----------------------------------</p>
 <% @plots.each do |plot| %>
   <div id="plot_<%= plot.id %>">
-    <p>Plot number: <%= plot.number %></p>
-    <b>Plants:</b>
+    <b>Plot number: <%= plot.number %></b> <br />
+    <i>Plants:</i>
     <% plot.plant_plots.each do |plant_plot| %>
       <div id="<%= plant_plot.id %>">
         <li> <%= plant_plot.plant.name %>  <%= button_to 'Delete Plant From Plot', plant_plot_path(plant_plot), method: :delete %> <br />
