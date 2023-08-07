@@ -11,6 +11,7 @@ def load_test_data
   @plant3 = Plant.create!(name: 'Melon', description: 'Grows quickly, tastes good', days_to_harvest: 50)
 
   PlantPlot.create!(plant: @plant1, plot: @plot1)
+  PlantPlot.create!(plant: @plant1, plot: @plot2)
   PlantPlot.create!(plant: @plant2, plot: @plot1)
   PlantPlot.create!(plant: @plant3, plot: @plot2)
 end
