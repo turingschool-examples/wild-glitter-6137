@@ -1,3 +1,4 @@
 class Plot < ApplicationRecord
    belongs_to :garden
-end
+   has_and_belongs_to_many :plants
+ end
