@@ -16,8 +16,8 @@ RSpec.describe Garden, type: :model do
       @plot_3 = @garden_2.plots.create!(number: 25, size: "Medium", direction: "South")
       @plot_4 = @garden_2.plots.create!(number: 50, size: "Large", direction: "West")
   
-      @plant_1 = Plant.create!(name: "Wild Iris", description: "Delicate and beautiful", days_to_harvest: 50)
-      @plant_2 = Plant.create!(name: "Rose", description: "Thorny", days_to_harvest: 60)
+      @plant_1 = Plant.create!(name: "Wild Iris", description: "Delicate and beautiful", days_to_harvest: 120)
+      @plant_2 = Plant.create!(name: "Rose", description: "Thorny", days_to_harvest: 50)
       @plant_3 = Plant.create!(name: "Sunflower", description: "Brightens up any place!", days_to_harvest: 40)
       @plant_4 = Plant.create!(name: "Aloe", description: "Soothing", days_to_harvest: 30)
       @plant_5 = Plant.create!(name: "Monstera", description: "Low light plant", days_to_harvest: 20)

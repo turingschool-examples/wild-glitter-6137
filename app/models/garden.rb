@@ -3,7 +3,6 @@ class Garden < ApplicationRecord
    has_many :plants, through: :plots
 
    def sub_100_to_harvest
-    require 'pry'; binding.pry
-    plants.where(days_to_harvest < 100).distinct
+    plants.where("days_to_harvest < ?", 100).distinct
    end
 end
