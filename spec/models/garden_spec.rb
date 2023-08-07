@@ -21,16 +21,12 @@ RSpec.describe Garden, type: :model do
     "Leafy", days_to_harvest: 50 )
     plant3 = plot2.plants.create!(name: "Brocolli", description:
     "Leafy head", days_to_harvest: 60 )
-    plant4 = plot2.plants.create!(name: "Tomatillo", description:
+    plant4 = plot3.plants.create!(name: "Grape", description:
+    "Fruit vine", days_to_harvest: 100 )
+    plant5 = plot2.plants.create!(name: "Tomatillo", description:
     "Fruit", days_to_harvest: 80 )
-    plant5 = plot3.plants.create!(name: "Grape", description:
-    "Fruit vine", days_to_harvest: 100 )
-    plant6 = plot3.plants.create!(name: "Tomato", description:
-    "Fruit not vegetable", days_to_harvest: 75 )
-    plant7 = plot2.plants.create!(name: "Tomato", description:
-    "Fruit not vegetable", days_to_harvest: 75 )
-    plant8 = plot2.plants.create!(name: "Grape", description:
-    "Fruit vine", days_to_harvest: 100 )
+    
+    
 
 
     plant_plot1 = PlantPlot.create!(plant: plant1, plot: plot2)
@@ -38,8 +34,13 @@ RSpec.describe Garden, type: :model do
     
 
     sorted_plants = garden1.plant_occurences
+
+    #Sorts by occurrences and make is a method to call
     expect(sorted_plants.first.occurrences).to eq(3)
-    
+
+    #removes grape because it has a days to harvest <= 100
+    expect(sorted_plants.fourth.name).to eq("Tomatillo")
+
     end
   end
 end
