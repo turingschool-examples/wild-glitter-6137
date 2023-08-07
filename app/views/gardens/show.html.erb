@@ -1,0 +1,21 @@
+<h1><%= @garden.name %></h1>
+<p>----------------------------------</p>
+<b> Plants with less than 100 days to harvest </b>
+<br />
+<br />
+<div id="early_harvest">
+<ul>
+<% @garden.sub_100_to_harvest.each do |plant| %>
+    <li><%= plant.name %></p>
+<% end %>
+</ul>
+</div>
+
+<div id="ordered_plants">
+<ol>
+<b>Most popular plants in order of highest to lowest quantity in the garden:</b>
+<% @garden.plants_by_quantity.each do |plant| %>
+    <li><%= plant.name %></li>
+<% end %>
+</ol>
+</div>
