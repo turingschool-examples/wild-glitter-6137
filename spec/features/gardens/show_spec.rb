@@ -21,19 +21,24 @@ RSpec.describe "Garden's Show Page" do
     visit garden_path(@garden)
   end
 
-  # User Story 3
   describe "as a visitor" do
     describe "when I visit a garden's show page ('/gardens/:id')" do
-      it "then I see a list of plants that are included in that garden's plots, and I see that this list is unique (no duplicate plants)," do
+      # User Story 3
+      it "then I see a list of plants that are included in that garden's plots, and I see that this list is unique (no duplicate plants),and I see that this list only includes plants that take less than 100 days to harvest" do
+        expect(page).to have_content(@garden.name)
+        
         within("#plant-list") do
+          expect(page).to have_content("Flowers with Less Than 100 Days to Harvest")
           expect(page).to have_content(@plant1.name)
           expect(page).to have_content(@plant3.name)
+          expect(page).to_not have_content(@plant2.name)
         end
       end
 
-      it "and I see that this list only includes plants that take less than 100 days to harvest" do
-       # model method to find unique list of plants per plot (Plot) where harvest < 100 days
-        expect(page).to have_content(@plot1.plants_with_quick_harvest)
+      # Extension 1
+      xit "Then I see the list of plants is sorted by the number of times the plant appears in any of that garden's plots from most to least
+      (Note: you should only make 1 database query to retrieve the sorted list of plants)" do
+
       end
     end
   end

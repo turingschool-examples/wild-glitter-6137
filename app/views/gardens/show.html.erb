@@ -1,0 +1,8 @@
+<h1><%= @garden.name %></h1>
+
+<div id="plant-list">
+  <h4>Flowers with Less Than 100 Days to Harvest</h4>
+    <% @quick_harvest.each do |plant| %>
+    <p>Name: <%= plant %></p>
+    <% end %> 
+</div>
