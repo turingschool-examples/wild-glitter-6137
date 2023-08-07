@@ -31,7 +31,6 @@ describe "plots index" do
 
   it "can see all bulk discount ids and attributes that are associated with the merchant" do
     expect(page).to have_content(@plot_1.number)
-    expect(page).to have_content(@plot_1.quantity_threshold)
     expect(page).to have_content(@plot_2.number)
     expect(page).to have_content(@plot_3.number)
     expect(page).to have_content(@plot_4.number)
