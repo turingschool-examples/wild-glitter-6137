@@ -40,4 +40,25 @@ RSpec.describe Plot do
       end
     end
   end
+
+  # User Story 2, Remove a Plant from a Plot
+  # Note: you do not need to test for any sad paths or implement any flash messages.
+
+  describe "As a visitor" do
+    describe "When I visit the plots index page "do
+      describe "Next to each plant's name" do
+        describe "I see a link to remove that plant from that plot" do
+          describe "When I click on that link" do
+            describe "I'm returned to the plots index page" do
+              describe "And I no longer see that plant listed under that plot," do
+                it "And I still see that plant's name under other plots that is was associated with." do
+
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end
