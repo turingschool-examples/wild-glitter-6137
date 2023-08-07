@@ -6,7 +6,7 @@
     <% plot.plants.each do |plant| %>
         <br>
         <%= plant.name %>
-        <%= button_to "Delete #{plant.name}", garden_plant_plot_path(plot.id, plant.id), method: :delete %>
+        <%= button_to "Delete #{plant.name}", plot_plant_plot_path(plot.id, plant.id), method: :delete %>
     <% end %>
     </section>
 <% end %>
