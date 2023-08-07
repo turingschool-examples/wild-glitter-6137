@@ -16,5 +16,15 @@ RSpec.describe "The Plots Index", type: :feature do
         end
       end
     end
+
+    it "displays button to Remove plant from plot, but not delete the plant from other plots" do
+      visit plots_path
+
+      Plot.all.each do |plot|
+        plot.plants.each do |plant|
+          expect(page).to have_button("Remove")
+        end
+      end
+    end
   end
 end
