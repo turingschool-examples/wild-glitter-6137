@@ -28,6 +28,10 @@ RSpec.describe "gardens show page", type: :feature do
       plot_2.plants << plant_3
 
       visit garden_path(garden_1)
+
+      expect(page).to have_content(plant_1.name)
+      expect(page).to have_content(plant_2.name)
+      expect(page).to have_content(plant_3.name)
     end
   end
 end
