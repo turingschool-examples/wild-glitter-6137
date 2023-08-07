@@ -18,13 +18,17 @@ RSpec.describe "plots index page" do
     
     visit plots_path
 
-    expect(page).to have_content(plot_1.number)
-    expect(page).to have_content(plant_1.name)
-    expect(page).to have_content(plant_2.name)
-  
-    expect(page).to have_content(plot_2.number)
-    expect(page).to have_content(plant_3.name)
-    expect(page).to have_content(plant_4.name)
+    within(".plot-#{plot_1.id}") do
+      expect(page).to have_content(plot_1.number)
+      expect(page).to have_content(plant_1.name)
+      expect(page).to have_content(plant_2.name)
+    end
+    
+    within(".plot-#{plot_2.id}") do
+      expect(page).to have_content(plot_2.number)
+      expect(page).to have_content(plant_3.name)
+      expect(page).to have_content(plant_4.name)
+    end
   end
 
   it "has a link to delete plants from plots" do
