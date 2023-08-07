@@ -60,16 +60,19 @@ RSpec.describe Plot do
               describe "And I no longer see that plant listed under that plot," do
                 it "And I still see that plant's name under other plots that is was associated with." do
                   visit "/plots"
+                  save_and_open_page
 
-                  expect(page).to have_link("#{@plot_1.number} remove")
-                  expect(page).to have_link("#{@plot_2.number} remove")
-                  expect(page).to have_link("#{@plot_3.number} remove")
+                  expect(page).to have_button("Remove #{@plant_1.name}")
+                  expect(page).to have_button("Remove #{@plant_2.name}")
+                  expect(page).to have_button("Remove #{@plant_3.name}")
+                  expect(page).to have_button("Remove #{@plant_4.name}")
 
-                  click_link "#{@plot_1.number} remove"
+
+                  click_button "Remove #{@plant_4.name}"
 
                   expect(current_path).to eq("/plots")
 
-                  expect(page).to_not have_content(@plot_1.number)
+                  expect(page).to have_content(@plant_4.name)
                 end
               end
             end
