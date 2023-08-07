@@ -1,0 +1,18 @@
+<header>
+  <h1>Community Garden</h1>
+</header>
+<nav>
+</nav>
+<section>
+  <h3>All Plots</h3>
+  <ul>
+    <% @plots.each do |plot| %>
+      <li>Plot #<%= plot.number %>:
+        <ol>
+          <% plot.plants.each do |plant| %>
+            <li>plant: <%= plant.name %></li>
+          <% end %>
+        </ol>
+    <% end %>
+  </ul>
+</section>
