@@ -7,10 +7,10 @@
   <h3>All Plots</h3>
   <ul>
     <% @plots.each do |plot| %>
-      <li>Plot #<%= plot.number %>:
+      <li id = "plot_<%= plot.id %>">Plot #<%= plot.number %>:
         <ol>
           <% plot.plants.each do |plant| %>
-            <li>plant: <%= plant.name %></li>
+            <li id = "plant_<%= plant.id %>">plant: <%= plant.name %> - <%= link_to "remove plant", plot_plant_path(plot, plant), method: :delete %></li>
           <% end %>
         </ol>
     <% end %>

@@ -31,6 +31,8 @@ describe "Plots index page" do
     @pp_7 = PlotPlant.create!(plot_id: @plot_4.id, plant_id: @plant_7.id)
     @pp_8 = PlotPlant.create!(plot_id: @plot_5.id, plant_id: @plant_8.id)
     @pp_9 = PlotPlant.create!(plot_id: @plot_2.id, plant_id: @plant_1.id)
+
+    visit plots_path
   end
   describe "As a visitor" do
     describe "when I visit the plots index page ('/plots')" do
@@ -50,8 +52,13 @@ describe "Plots index page" do
         end
       end
       it "US2.b When I click on that link I'm returned to the plots index page And I no longer see that plant listed under that plot, And I still see that plant's name under other plots that is was associated with." do
-        click_link "remove plant"
-
+        within "#plot_#{@plot_1.id}" do
+          within "#plant_#{@plant_1.id}" do
+            click_link "remove plant"
+          end
+        end
+        
+        save_and_open_page
         expect(current_path).to eq("/plots")
         within "#plot_#{@plot_1.id}" do
           expect(page).to_not have_content("#{@plant_1.name}")
