@@ -6,10 +6,10 @@ RSpec.describe "Plots Index Page", type: :feature do
 
     @plot1 = @garden1.plots.create!(number: 25, size: "Large", direction: "East")
     @plot2 = @garden1.plots.create!(number: 15, size: "Small", direction: "West")
-
+    
+    @plant5 = @plot1.plants.create!(name: "Parsnip", description: "Has an earthy taste", days_to_harvest: 50)
     @plant1 = @plot1.plants.create!(name: "Starfruit", description: "A fruit that grows in hot, humid weather", days_to_harvest: 90)
     @plant2 = @plot1.plants.create!(name: "Kale", description: "Great in soups and stir frys", days_to_harvest: 105)
-    @plant5 = @plot1.plants.create!(name: "Parsnip", description: "Has an earthy taste", days_to_harvest: 50)
 
     @plant3 = @plot2.plants.create!(name: "Parsnip", description: "Has an earthy taste", days_to_harvest: 50)
     @plant4 = @plot2.plants.create!(name: "Hops", description: "Used to flavor beer", days_to_harvest: 110)
@@ -28,8 +28,13 @@ RSpec.describe "Plots Index Page", type: :feature do
     end
   end
 
-  # scenaro "Next to each plant name I see a link to remove the plant from plot but its still associated with other plots" do 
-  #   visit plots_path 
-
-  # end
+  scenario "Next to each plant name I see a link to remove the plant from plot but its still associated with other plots" do 
+    visit plots_path 
+    expect(page).to have_content("Plant Name: Parsnip").twice
+    
+    expect(page).to have_link("Delete: #{@plant5.name}")
+    click_link("Delete: #{@plant5.name}", match: :first)
+    
+    expect(page).to have_content("Plant Name: Parsnip").once
+  end
 end
