@@ -18,15 +18,15 @@ RSpec.describe "the plots index page" do
   it "displays a link/button to remove plant from plot next to each plant" do
     visit plots_path
 
-    expect(page).to have_button "Remove Plant"
+    expect(page).to have_link "Remove Plant"
   end
 
   it "returns me to the plots index upon clicking the link and I no longer see that plant listed under the plot" do
     visit plots_path
 
-    expect(page).to have_button "Remove Plant"
+    expect(page).to have_link "Remove Plant"
 
-    first(:button, "Remove Plant").click
+    first(:link, "Remove Plant").click
 
     expect(page).to_not have_content("Cherry Tomato")
   end
