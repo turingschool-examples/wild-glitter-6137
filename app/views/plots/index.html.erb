@@ -1,5 +1,4 @@
 <% @plots.each do |plot| %>
-
     <section id="plot_<%= plot.id %>">
     <br>
     <p>Plot Number: <%= plot.number %>
@@ -7,6 +6,7 @@
     <% plot.plants.each do |plant| %>
         <br>
         <%= plant.name %>
+        <%= form_with  %>
     <% end %>
-    </section
-<% end %>>
+    </section>
+<% end %>
