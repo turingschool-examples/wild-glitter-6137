@@ -51,6 +51,5 @@ RSpec.describe "Gardens show page" do
     expect(page).to_not have_content("Black Pearl Pepper")
     expect(page).to_not have_content("Romanesco Broccoli")
     expect(page).to_not have_content("Turban Squash")
-    save_and_open_page
   end
 end
