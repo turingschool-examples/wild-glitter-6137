@@ -50,9 +50,17 @@ RSpec.describe 'Plots Index Page', type: :feature do
                 within "#plot_#{@plot1.id}" do
                     expect(page).to have_content(@plant2.name)
                     expect(page).to have_button("Delete #{@plant2.name}")
+                end
+                within "#plot_#{@plot1.id}" do
                     click_button "Delete #{@plant2.name}"
+                end
+                
+                visit plots_path
+
+                within "#plot_#{@plot1.id}" do
                     expect(page).to_not have_content(@plant2.name)
                 end
+                
 
                 within "#plot_#{@plot2.id}" do
                     expect(page).to have_content(@plant4.name)

@@ -6,9 +6,7 @@
     <% plot.plants.each do |plant| %>
         <br>
         <%= plant.name %>
-        <%= form_with model: plant, method: :destroy, controller: 'plants', local: true do |f| %>
-            <%= f.submit "Delete #{plant.name}" %>
-        <% end %>
+        <%= button_to "Delete #{plant.name}", garden_plant_plot_path(plot.id, plant.id), method: :delete %>
     <% end %>
     </section>
 <% end %>
