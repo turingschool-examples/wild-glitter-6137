@@ -43,19 +43,19 @@ RSpec.describe "Plots Index Page", type: :feature do
   it "shows a list each plot's plant under the plot number" do
     visit plots_path
 
-    within("#plot-#{plot_a1.id}") do
+    within("#plot-#{@plot_a1.id}") do
       expect(page).to have_content(@plant_1.name).once
       expect(page).to have_content(@plant_2.name).once
       expect(page).to have_content(@plant_3.name).once
     end
 
-    within("#plot-#{plot_a2.id}") do
+    within("#plot-#{@plot_a2.id}") do
       expect(page).to have_content(@plant_2.name).once
       expect(page).to have_content(@plant_3.name).once
       expect(page).to have_content(@plant_4.name).once
     end
 
-    within("#plot-#{plot_b1.id}") do
+    within("#plot-#{@plot_b1.id}") do
       expect(page).to have_content(@plant_3.name).once
       expect(page).to have_content(@plant_4.name).once
     end
