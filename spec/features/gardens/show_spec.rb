@@ -32,7 +32,7 @@ RSpec.describe 'the gardens show page' do
     visit garden_path(garden1)
     #save_and_open_page
     expect(page).to have_content("Tomato - Occurrences: 3")
-    expect(page).to_not have_content("Grape - Occurrences: 2")
+    expect(page).to_not have_content("Grape")
     expect(page).to have_content("Kale - Occurrences: 2")
     end
   end
